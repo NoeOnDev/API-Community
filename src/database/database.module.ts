@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { SequelizeModule } from '@nestjs/sequelize';
+import { User } from 'src/users/user.model';
 
 @Module({
     imports: [
@@ -10,6 +11,7 @@ import { SequelizeModule } from '@nestjs/sequelize';
             username: 'root',
             password: 'password',
             database: 'test',
+            models: [User],
             autoLoadModels: true,
             synchronize: true,
             logging: false,
