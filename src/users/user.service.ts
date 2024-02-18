@@ -4,8 +4,12 @@ import { User } from './user.model';
 
 @Injectable()
 export class UserService {
-    constructor(
-        @InjectModel(User)
-        private userModel: typeof User,
-    ) {}
+  constructor(
+    @InjectModel(User)
+    private userModel: typeof User,
+  ) {}
+
+  async findAll(): Promise<User[]> {
+    return this.userModel.findAll();
+  }
 }
