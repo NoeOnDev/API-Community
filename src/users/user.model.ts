@@ -1,4 +1,4 @@
-import { Column, Table, Model, DataType, Unique, AllowNull, IsEmail, Length, BeforeSave, Index } from 'sequelize-typescript';
+import { Column, Table, Model, DataType, Unique, AllowNull, BeforeSave, Index } from 'sequelize-typescript';
 import * as bcrypt from 'bcrypt';
 
 @Table({ timestamps: true })
@@ -22,19 +22,16 @@ export class User extends Model {
     @Index
     @Unique
     @AllowNull(false)
-    @Length({ min: 3, max: 20 })
     @Column
     username: string;
 
     @Index
     @Unique
     @AllowNull(false)
-    @IsEmail
     @Column
     email: string;
 
     @AllowNull(false)
-    @Length({ min: 8, max: 100 })
     @Column
     password: string;
 
