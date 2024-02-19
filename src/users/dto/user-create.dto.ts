@@ -1,4 +1,5 @@
 import { IsEmail, IsNotEmpty, MinLength, MaxLength, Matches } from 'class-validator';
+import { IsPast } from './is-past.validator';
 
 export class UserCreateDto {
     @IsNotEmpty()
@@ -8,6 +9,7 @@ export class UserCreateDto {
     lastName: string;
 
     @IsNotEmpty()
+    @IsPast({ message: 'Date cannot be in the future' })
     birthday: Date;
 
     @MinLength(10)
