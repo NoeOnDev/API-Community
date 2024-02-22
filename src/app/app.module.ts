@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { SequelizeModule } from '@nestjs/sequelize';
+import { User } from 'src/users/user.model';
 
 @Module({
   imports: [
@@ -12,7 +13,7 @@ import { SequelizeModule } from '@nestjs/sequelize';
       username: 'root',
       password: 'password',
       database: 'testjs',
-      models: [],
+      models: [User],
       autoLoadModels: true,
       synchronize: true,
     })
