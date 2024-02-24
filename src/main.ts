@@ -8,6 +8,7 @@ async function bootstrap() {
     .setTitle('NestJS API REST Example')
     .setDescription('The NestJS API REST Example')
     .setVersion('1.0')
+    .addTag('nestjs')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('/', app, document);
