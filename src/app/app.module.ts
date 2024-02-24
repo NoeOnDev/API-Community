@@ -18,6 +18,7 @@ import { User } from 'src/users/user.model';
       models: [User],
       autoLoadModels: true,
       synchronize: true,
+      logging: false,
     })
   ],
   controllers: [AppController],
