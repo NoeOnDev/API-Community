@@ -1,4 +1,5 @@
-import { Model, Column, Table } from 'sequelize-typescript';
+import { Model, Column, Table, BeforeCreate } from 'sequelize-typescript';
+import * as bcrypt from 'bcrypt';
 
 @Table
 export class User extends Model {
@@ -19,4 +20,12 @@ export class User extends Model {
 
     @Column
     password: string;
+
+    @BeforeCreate
+    static async hashingPassword(user:User) {
+        const RoundSalt = 10;
+        const salt  = await bcrypt.genSalt(RoundSalt);
+        const hashPassword = await bcrypt.hash(user.password, salt);
+        user.password = hashPassword;
+    }
 }
