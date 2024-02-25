@@ -9,6 +9,11 @@ export class UsersService {
         private userModel: typeof User,
     ) {}
 
+    async create(userData): Promise<User> {
+        const user = new User(userData);
+        return await user.save();
+    }
+
     findAll(): Promise<User[]> {
         return this.userModel.findAll();
     }
