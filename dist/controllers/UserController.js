@@ -15,10 +15,11 @@ class UserController {
         this.createUser = (req, res) => __awaiter(this, void 0, void 0, function* () {
             try {
                 const user = yield this.userService.createUser(req.body);
-                res.json(user);
+                res.status(201).json(user);
             }
             catch (error) {
-                res.status(500).json({ error: 'Internal Server Error "createUser"' });
+                console.error(error);
+                res.status(500).json({ error: 'Internal Server Error' });
             }
         });
         this.getUserById = (req, res) => __awaiter(this, void 0, void 0, function* () {
@@ -27,10 +28,13 @@ class UserController {
                 if (!user) {
                     res.status(404).json({ error: 'User not found' });
                 }
-                res.json(user);
+                else {
+                    res.json(user);
+                }
             }
             catch (error) {
-                res.status(500).json({ error: 'Internal Server Error "getUserById"' });
+                console.error(error);
+                res.status(500).json({ error: 'Internal Server Error' });
             }
         });
         this.userService = userService;
