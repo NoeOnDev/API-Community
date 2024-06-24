@@ -3,13 +3,16 @@
   "version": "1.0.0",
   "main": "server.ts",
   "scripts": {
-    "dev": ""
+    "start": "node ./dist/server.js",
+    "build": "tsc",
+    "dev": "tsc-watch --onSuccess \"node ./dist/server.js\""
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "devDependencies": {
+    "tsc-watch": "^6.2.0",
     "typescript": "^5.5.2"
   },
   "dependencies": {
