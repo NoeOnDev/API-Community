@@ -1,9 +1,9 @@
 {
   "name": "try-nestpro",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "server.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": ""
   },
   "keywords": [],
   "author": "",
@@ -11,5 +11,9 @@
   "description": "",
   "devDependencies": {
     "typescript": "^5.5.2"
+  },
+  "dependencies": {
+    "@types/express": "^4.17.21",
+    "express": "^4.19.2"
   }
 }
