@@ -1,4 +1,5 @@
 import 'reflect-metadata';
+import './config/dependencyInjection';
 import { AppDataSource } from './config/ormConfig';
 import { env } from './config/env';
 import app from './app';

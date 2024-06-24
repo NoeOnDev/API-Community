@@ -4,6 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 require("reflect-metadata");
+require("./config/dependencyInjection");
 const ormConfig_1 = require("./config/ormConfig");
 const env_1 = require("./config/env");
 const app_1 = __importDefault(require("./app"));

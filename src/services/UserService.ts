@@ -1,15 +1,13 @@
-import { injectable } from "tsyringe";
+import { injectable, inject } from "tsyringe";
 import { UserRepository } from "../repositories/UserRepository";
 import { User } from "../models/User";
 import { IUserService } from "../interfaces/IUserService";
 
 @injectable()
 export class UserService implements IUserService {
-    private userRepository: UserRepository;
-
-    constructor(userRepository: UserRepository) {
-        this.userRepository = userRepository;
-    }
+    constructor(
+        @inject("UserRepository") private userRepository: UserRepository
+    ) { }
 
     async createUser(userData: Partial<User>): Promise<User> {
         return await this.userRepository.createUser(userData);

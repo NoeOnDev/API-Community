@@ -1,7 +1,9 @@
+import { injectable } from "tsyringe";
 import { Repository } from "typeorm";
 import { AppDataSource } from "../config/ormConfig";
 import { User } from "../models/User";
 
+@injectable()
 export class UserRepository {
     private repository: Repository<User>;
 

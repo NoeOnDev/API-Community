@@ -1,17 +1,12 @@
 import { Router } from "express";
-import { UserRepository } from "../repositories/UserRepository";
-import { UserService } from "../services/UserService";
+import { container } from "tsyringe";
 import { UserController } from "../controllers/UserController";
 
 export class UserFactory {
-    private userRepository: UserRepository;
-    private userService: UserService;
     private userController: UserController;
 
     constructor() {
-        this.userRepository = new UserRepository();
-        this.userService = new UserService(this.userRepository);
-        this.userController = new UserController(this.userService);
+        this.userController = container.resolve(UserController);
     }
 
     getRouter(): Router {
