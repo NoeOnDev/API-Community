@@ -5,6 +5,8 @@
     "outDir": "./dist",                                  /* Directorio donde se colocarán los archivos compilados. */
     "rootDir": "./src",                                  /* Directorio raíz de los archivos fuente. */
     "esModuleInterop": true,                             /* Habilita la interoperabilidad de módulos ES y CommonJS. */
+    "emitDecoratorMetadata": true,                       /* Habilita la emisión de metadatos de decoradores para la reflexión. */
+    "experimentalDecorators": true,                      /* Habilita la sintaxis de decoradores de TypeScript. */
     "forceConsistentCasingInFileNames": true,            /* Asegura que el uso de mayúsculas y minúsculas en los nombres de archivo sea consistente. */
     "strict": true,                                      /* Habilita todas las opciones de verificación estricta. */
     "skipLibCheck": true,                                /* Omite la verificación de archivos de definición de bibliotecas para mejorar el rendimiento de la compilación. */
