@@ -4,11 +4,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-process.loadEnvFile();
+const env_1 = require("./config/env");
 const app = (0, express_1.default)();
-app.get('/', (_req, res) => {
-    res.send('Hello World');
-});
-app.listen(process.env.PORT, () => {
-    console.log(`Server is running on port ${process.env.PORT}`);
+const port = env_1.env.port;
+app.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
 });
