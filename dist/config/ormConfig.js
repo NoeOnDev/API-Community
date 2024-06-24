@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppDataSource = void 0;
 const typeorm_1 = require("typeorm");
 const env_1 = require("./env");
-const User_1 = require("../entity/User");
+const User_1 = require("../models/User");
 exports.AppDataSource = new typeorm_1.DataSource({
     type: "postgres",
     host: env_1.env.db.host,
