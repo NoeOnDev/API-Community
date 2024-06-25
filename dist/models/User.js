@@ -18,7 +18,7 @@ let User = class User {
         this.street = '';
         this.email = '';
         this.password = '';
-        this.role = '';
+        this.role = 'user';
     }
 };
 exports.User = User;
@@ -43,7 +43,7 @@ __decorate([
     __metadata("design:type", String)
 ], User.prototype, "password", void 0);
 __decorate([
-    (0, typeorm_1.Column)(),
+    (0, typeorm_1.Column)({ default: 'user' }),
     __metadata("design:type", String)
 ], User.prototype, "role", void 0);
 exports.User = User = __decorate([
