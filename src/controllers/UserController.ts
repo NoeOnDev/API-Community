@@ -29,4 +29,19 @@ export class UserController {
             res.status(500).json({ error: 'Internal Server Error' });
         }
     }
+
+    loginUser = async (req: Request, res: Response): Promise<void> => {
+        try {
+            const { email, password } = req.body;
+            const user = await this.userService!.loginUser(email, password);
+            if (!user) {
+                res.status(401).json({ error: 'Invalid credentials' });
+            } else {
+                res.json(user);
+            }
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ error: 'Internal Server Error' });
+        }
+    }
 }

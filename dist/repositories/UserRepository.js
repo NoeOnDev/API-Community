@@ -37,6 +37,11 @@ let UserRepository = class UserRepository {
             return yield this.repository.findOneBy({ id });
         });
     }
+    getUserByEmail(email) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.repository.findOneBy({ email });
+        });
+    }
 };
 exports.UserRepository = UserRepository;
 exports.UserRepository = UserRepository = __decorate([

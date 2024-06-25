@@ -13,6 +13,7 @@ export class UserFactory {
         const router = Router();
         router.post("/", this.userController.createUser);
         router.get("/:id", this.userController.getUserById);
+        router.post("/login", this.userController.loginUser);
         return router;
     }
 }

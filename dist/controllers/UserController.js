@@ -51,6 +51,22 @@ let UserController = class UserController {
                 res.status(500).json({ error: 'Internal Server Error' });
             }
         });
+        this.loginUser = (req, res) => __awaiter(this, void 0, void 0, function* () {
+            try {
+                const { email, password } = req.body;
+                const user = yield this.userService.loginUser(email, password);
+                if (!user) {
+                    res.status(401).json({ error: 'Invalid credentials' });
+                }
+                else {
+                    res.json(user);
+                }
+            }
+            catch (error) {
+                console.error(error);
+                res.status(500).json({ error: 'Internal Server Error' });
+            }
+        });
     }
 };
 exports.UserController = UserController;

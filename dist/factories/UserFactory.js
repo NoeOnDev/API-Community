@@ -12,6 +12,7 @@ class UserFactory {
         const router = (0, express_1.Router)();
         router.post("/", this.userController.createUser);
         router.get("/:id", this.userController.getUserById);
+        router.post("/login", this.userController.loginUser);
         return router;
     }
 }

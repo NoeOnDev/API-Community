@@ -45,6 +45,15 @@ let UserService = class UserService {
             return yield this.userRepository.getUserById(id);
         });
     }
+    loginUser(email, password) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const user = yield this.userRepository.getUserByEmail(email);
+            if (user && (yield this.hashService.comparePassword(password, user.password))) {
+                return user;
+            }
+            return null;
+        });
+    }
 };
 exports.UserService = UserService;
 exports.UserService = UserService = __decorate([
