@@ -1,10 +1,10 @@
 import { Request, Response } from "express";
-import { autoInjectable } from "tsyringe";
-import { UserService } from "../services/UserService";
+import { autoInjectable, inject } from "tsyringe";
+import { IUserService } from "../interfaces/IUserService";
 
 @autoInjectable()
 export class UserController {
-    constructor(private userService?: UserService) { }
+    constructor(@inject("UserService") private userService?: IUserService) { }
 
     createUser = async (req: Request, res: Response): Promise<void> => {
         try {

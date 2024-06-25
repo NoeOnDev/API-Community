@@ -2,10 +2,10 @@ import { injectable } from "tsyringe";
 import { Repository } from "typeorm";
 import { AppDataSource } from "../config/ormConfig";
 import { User } from "../models/User";
-import { IUserService } from "../interfaces/IUserService";
+import { IUserRepository } from "../interfaces/IUserRepository";
 
 @injectable()
-export class UserRepository implements IUserService {
+export class UserRepository implements IUserRepository {
     private repository: Repository<User>;
 
     constructor() {

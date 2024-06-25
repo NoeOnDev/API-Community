@@ -23,7 +23,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserService = void 0;
 const tsyringe_1 = require("tsyringe");
-const UserRepository_1 = require("../repositories/UserRepository");
 let UserService = class UserService {
     constructor(userRepository) {
         this.userRepository = userRepository;
@@ -42,6 +41,6 @@ let UserService = class UserService {
 exports.UserService = UserService;
 exports.UserService = UserService = __decorate([
     (0, tsyringe_1.injectable)(),
-    __param(0, (0, tsyringe_1.inject)("UserRepository")),
-    __metadata("design:paramtypes", [UserRepository_1.UserRepository])
+    __param(0, (0, tsyringe_1.inject)("IUserRepository")),
+    __metadata("design:paramtypes", [Object])
 ], UserService);

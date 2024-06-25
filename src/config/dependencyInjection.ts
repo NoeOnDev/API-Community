@@ -1,6 +1,13 @@
 import { container } from "tsyringe";
 import { UserRepository } from "../repositories/UserRepository";
 import { UserService } from "../services/UserService";
+import { IUserRepository } from "../interfaces/IUserRepository";
+import { IUserService } from "../interfaces/IUserService";
 
-container.register("UserRepository", { useClass: UserRepository });
-container.register("UserService", { useClass: UserService });
+container.register<IUserRepository>("IUserRepository", {
+    useClass: UserRepository
+});
+
+container.register<IUserService>("UserService", {
+    useClass: UserService
+});
