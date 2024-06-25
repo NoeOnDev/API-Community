@@ -23,12 +23,20 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserService = void 0;
 const tsyringe_1 = require("tsyringe");
+const HashService_1 = require("./HashService");
 let UserService = class UserService {
-    constructor(userRepository) {
+    constructor(userRepository, hashService) {
         this.userRepository = userRepository;
+        this.hashService = hashService;
     }
     createUser(userData) {
         return __awaiter(this, void 0, void 0, function* () {
+            if (!userData.role) {
+                userData.role = 'user';
+            }
+            if (userData.password) {
+                userData.password = yield this.hashService.hashPassword(userData.password);
+            }
             return yield this.userRepository.createUser(userData);
         });
     }
@@ -42,5 +50,6 @@ exports.UserService = UserService;
 exports.UserService = UserService = __decorate([
     (0, tsyringe_1.injectable)(),
     __param(0, (0, tsyringe_1.inject)("IUserRepository")),
-    __metadata("design:paramtypes", [Object])
+    __param(1, (0, tsyringe_1.inject)("HashService")),
+    __metadata("design:paramtypes", [Object, HashService_1.HashService])
 ], UserService);
