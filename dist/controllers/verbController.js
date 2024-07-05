@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.postCheckAnswer = exports.getVerb = exports.getVerbs = void 0;
+exports.getVerbsByMeaningsSpecific = exports.postCheckAnswer = exports.getVerb = exports.getVerbs = void 0;
 const verbService_1 = require("../services/verbService");
 const getVerbs = (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -21,9 +21,10 @@ const getVerbs = (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 exports.getVerbs = getVerbs;
-const getVerb = (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const getVerb = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const verb = yield (0, verbService_1.getRandomVerb)();
+        const meanings = req.query.meanings ? req.query.meanings.split(',') : [];
+        const verb = yield (0, verbService_1.getRandomVerb)(meanings);
         res.status(200).json(verb);
     }
     catch (error) {
@@ -42,3 +43,14 @@ const postCheckAnswer = (req, res) => __awaiter(void 0, void 0, void 0, function
     }
 });
 exports.postCheckAnswer = postCheckAnswer;
+const getVerbsByMeaningsSpecific = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const meanings = req.query.meanings ? req.query.meanings.split(',') : [];
+    try {
+        const verbs = yield (0, verbService_1.getVerbsByMeanings)(meanings);
+        res.status(200).json(verbs);
+    }
+    catch (error) {
+        res.status(500).send(error);
+    }
+});
+exports.getVerbsByMeaningsSpecific = getVerbsByMeaningsSpecific;

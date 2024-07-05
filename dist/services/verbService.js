@@ -9,15 +9,18 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.checkAnswer = exports.getRandomVerb = exports.getAllVerbs = void 0;
+exports.getVerbsByMeanings = exports.checkAnswer = exports.getRandomVerb = exports.getAllVerbs = void 0;
 const database_1 = require("../config/database");
 const getAllVerbs = () => __awaiter(void 0, void 0, void 0, function* () {
     const res = yield database_1.pool.query('SELECT * FROM verbs');
     return res.rows;
 });
 exports.getAllVerbs = getAllVerbs;
-const getRandomVerb = () => __awaiter(void 0, void 0, void 0, function* () {
-    const res = yield database_1.pool.query('SELECT * FROM verbs ORDER BY RANDOM() LIMIT 1');
+const getRandomVerb = (meanings) => __awaiter(void 0, void 0, void 0, function* () {
+    const query = meanings.length > 0 ?
+        'SELECT * FROM verbs WHERE meaning = ANY($1::text[]) ORDER BY RANDOM() LIMIT 1' :
+        'SELECT * FROM verbs ORDER BY RANDOM() LIMIT 1';
+    const res = yield database_1.pool.query(query, [meanings]);
     return res.rows[0];
 });
 exports.getRandomVerb = getRandomVerb;
@@ -26,3 +29,9 @@ const checkAnswer = (meaning, present, past, pastParticiple) => __awaiter(void 0
     return res.rowCount > 0;
 });
 exports.checkAnswer = checkAnswer;
+const getVerbsByMeanings = (meanings) => __awaiter(void 0, void 0, void 0, function* () {
+    const query = 'SELECT * FROM verbs WHERE meaning = ANY($1::text[])';
+    const res = yield database_1.pool.query(query, [meanings]);
+    return res.rows;
+});
+exports.getVerbsByMeanings = getVerbsByMeanings;
