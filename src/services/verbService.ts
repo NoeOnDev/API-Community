@@ -1,8 +1,20 @@
 import { pool } from '../config/database';
 import { Verb } from '../models/verb';
 
-export const getAllVerbs = async (): Promise<Verb[]> => {
-    const res = await pool.query('SELECT * FROM verbs');
+export const getAllVerbs = async (searchTerm: string = ''): Promise<Verb[]> => {
+    const query = searchTerm ?
+        `SELECT * FROM verbs WHERE meaning ILIKE $1 OR present ILIKE $1 OR past ILIKE $1 OR past_participle ILIKE $1` :
+        'SELECT * FROM verbs';
+    const values = searchTerm ? [`%${searchTerm}%`] : [];
+    const res = await pool.query(query, values);
+    return res.rows;
+};
+
+export const getRandomVerbs = async (meanings: string[], limit: number): Promise<Verb[]> => {
+    const query = meanings.length > 0 ?
+        'SELECT * FROM verbs WHERE meaning = ANY($1::text[]) ORDER BY RANDOM() LIMIT $2' :
+        'SELECT * FROM verbs ORDER BY RANDOM() LIMIT $2';
+    const res = await pool.query(query, [meanings, limit]);
     return res.rows;
 };
 

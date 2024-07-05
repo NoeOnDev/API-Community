@@ -9,11 +9,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getVerbsByMeaningsSpecific = exports.postCheckAnswer = exports.getVerb = exports.getVerbs = void 0;
+exports.getVerbsByMeaningsSpecific = exports.getRandomVerbsByMeanings = exports.postCheckAnswer = exports.getVerb = exports.getVerbs = void 0;
 const verbService_1 = require("../services/verbService");
-const getVerbs = (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const getVerbs = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const searchTerm = req.query.search ? req.query.search : '';
     try {
-        const verbs = yield (0, verbService_1.getAllVerbs)();
+        const verbs = yield (0, verbService_1.getAllVerbs)(searchTerm);
         res.status(200).json(verbs);
     }
     catch (error) {
@@ -43,6 +44,18 @@ const postCheckAnswer = (req, res) => __awaiter(void 0, void 0, void 0, function
     }
 });
 exports.postCheckAnswer = postCheckAnswer;
+const getRandomVerbsByMeanings = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const meanings = req.query.meanings ? req.query.meanings.split(',') : [];
+    const limit = req.query.limit ? parseInt(req.query.limit) : 10;
+    try {
+        const verbs = yield (0, verbService_1.getRandomVerbs)(meanings, limit);
+        res.status(200).json(verbs);
+    }
+    catch (error) {
+        res.status(500).send(error);
+    }
+});
+exports.getRandomVerbsByMeanings = getRandomVerbsByMeanings;
 const getVerbsByMeaningsSpecific = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const meanings = req.query.meanings ? req.query.meanings.split(',') : [];
     try {

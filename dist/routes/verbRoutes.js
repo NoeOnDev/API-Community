@@ -7,4 +7,5 @@ router.get('/verbs', verbController_1.getVerbs);
 router.get('/verb', verbController_1.getVerb);
 router.post('/check-answer', verbController_1.postCheckAnswer);
 router.get('/verbs/meanings', verbController_1.getVerbsByMeaningsSpecific);
+router.get('/verbs/random', verbController_1.getRandomVerbsByMeanings);
 exports.default = router;
