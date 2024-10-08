@@ -5,7 +5,8 @@
   "scripts": {
     "start": "node ./dist/index.js",
     "build": "tsc",
-    "dev": "tsc-watch --onSuccess \"node --env-file .env --watch ./dist/index.js\""
+    "dev": "tsc-watch --onSuccess \"node --env-file .env --watch ./dist/index.js\"",
+    "check-dep": "depcruise --config .dependency-cruiser.js src"
   },
   "keywords": [
     "community",
@@ -33,6 +34,9 @@
     "@types/pg": "^8.11.10",
     "@types/sequelize": "^4.28.20",
     "@types/uuid": "^10.0.0",
+    "dependency-cruiser": "^16.4.2",
+    "husky": "^9.1.6",
+    "lint-staged": "^15.2.10",
     "tsc-watch": "^6.2.0",
     "typescript": "^5.6.2"
   },
@@ -52,5 +56,10 @@
     "sequelize-typescript": "^2.1.6",
     "twilio": "^5.3.3",
     "uuid": "^10.0.0"
+  },
+  "lint-staged": {
+    "src/**/*.{js,ts,tsx}": [
+      "npm run check-dep"
+    ]
   }
 }

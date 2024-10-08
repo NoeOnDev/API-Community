@@ -12,3 +12,6 @@ dist
 
 # Dependencies
 package-lock.json
+
+# IDE
+.vscode
