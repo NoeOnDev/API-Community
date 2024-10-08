@@ -1,5 +1,6 @@
 import { UUID } from "./value-objects/UserUUID";
 import { hola } from "../application/hola";
+import { mundo } from "../application/mundo";
 
 export class User {
   constructor(
