@@ -1,8 +1,6 @@
 export class InvalidEmailDomainException extends Error {
-  constructor() {
-    super(
-      "The email domain is not allowed. Only @gmail.com and @hotmail.com are permitted."
-    );
+  constructor(message: string = "Invalid email domain") {
+    super(message);
     this.name = "InvalidEmailDomainException";
   }
 }

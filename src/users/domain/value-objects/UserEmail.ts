@@ -15,7 +15,11 @@ export class UserEmail {
 
   private ensureValidDomain(email: string): void {
     if (!this.isValidDomain(email)) {
-      throw new InvalidEmailDomainException();
+      throw new InvalidEmailDomainException(
+        `Invalid email domain. Allowed domains are: ${UserEmail.ALLOWED_DOMAINS.join(
+          ", "
+        )}`
+      );
     }
   }
 
