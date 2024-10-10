@@ -51,4 +51,16 @@ export class UserPassword {
   public getValue(): string {
     return this.value;
   }
+
+  public equals(other: UserPassword): boolean {
+    return this.value === other.getValue();
+  }
+
+  public serialize(): string {
+    return this.value;
+  }
+
+  public toString(): string {
+    return this.value;
+  }
 }

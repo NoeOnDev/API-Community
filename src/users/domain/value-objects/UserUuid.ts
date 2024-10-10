@@ -34,6 +34,10 @@ export class UserUuid {
     return this.value === other.getValue();
   }
 
+  public serialize(): string {
+    return this.value;
+  }
+
   public toString(): string {
     return this.value;
   }

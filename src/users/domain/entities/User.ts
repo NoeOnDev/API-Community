@@ -1,5 +1,6 @@
 import { UserUuid } from "../value-objects/UserUuid";
 import { UserEmail } from "../value-objects/UserEmail";
+import { UserPassword } from "../value-objects/UserPassword";
 import { UserPhone } from "../value-objects/UserPhone";
 
 export class User {
@@ -8,7 +9,7 @@ export class User {
     public uuid: UserUuid,
     public name: string,
     public email: UserEmail,
-    public password: string,
+    public password: UserPassword,
     public isEmailConfirmed: boolean,
     public isPhoneConfirmed: boolean,
     public phone?: UserPhone,
