@@ -1,13 +1,13 @@
 import { InvalidPasswordException } from "../exceptions/invalid-password.exception";
+import { ValueObject } from "./ValueObject";
 
-export class UserPassword {
-  private readonly value: string;
+export class UserPassword extends ValueObject<string> {
   private static readonly MIN_LENGTH = 8;
   private static readonly MAX_LENGTH = 50;
 
   private constructor(password: string) {
-    this.ensureValidPassword(password);
-    this.value = password;
+    super(password);
+    this.ensureIsValid();
   }
 
   public static create(password: string): UserPassword {
@@ -18,14 +18,14 @@ export class UserPassword {
     return new UserPassword(hashedPassword);
   }
 
-  private ensureValidPassword(password: string): void {
-    if (!this.hasValidLength(password)) {
+  protected ensureIsValid(): void {
+    if (!this.hasValidLength(this.value)) {
       throw new InvalidPasswordException(
         `Password length must be between ${UserPassword.MIN_LENGTH} and ${UserPassword.MAX_LENGTH} characters`
       );
     }
 
-    if (!this.hasRequiredCharacters(password)) {
+    if (!this.hasRequiredCharacters(this.value)) {
       throw new InvalidPasswordException(
         "Password must contain at least one uppercase letter, one lowercase letter, one number and one special character"
       );
@@ -48,19 +48,18 @@ export class UserPassword {
     return hasUpperCase && hasLowerCase && hasNumbers && hasSpecialChar;
   }
 
-  public getValue(): string {
-    return this.value;
-  }
-
-  public equals(other: UserPassword): boolean {
+  public equals(other: ValueObject<string>): boolean {
     return this.value === other.getValue();
   }
 
-  public serialize(): string {
-    return this.value;
-  }
-
-  public toString(): string {
-    return this.value;
+  public static isValid(password: string): boolean {
+    return (
+      password.length >= this.MIN_LENGTH &&
+      password.length <= this.MAX_LENGTH &&
+      /[A-Z]/.test(password) &&
+      /[a-z]/.test(password) &&
+      /\d/.test(password) &&
+      /[!@#$%^&*(),.?":{}|<>]/.test(password)
+    );
   }
 }

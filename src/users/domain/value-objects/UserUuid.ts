@@ -1,12 +1,11 @@
 import { UuidGenerator } from "../interfaces/UuidGenerator";
 import { InvalidUuidException } from "../exceptions/invalid-uuid.exception";
+import { ValueObject } from "./ValueObject";
 
-export class UserUuid {
-  private readonly value: string;
-
-  private constructor(value: string) {
-    this.ensureIsValidUuid(value);
-    this.value = value;
+export class UserUuid extends ValueObject<string> {
+  private constructor(uuid: string) {
+    super(uuid);
+    this.ensureIsValid();
   }
 
   public static create(uuidGenerator: UuidGenerator): UserUuid {
@@ -14,8 +13,8 @@ export class UserUuid {
     return new UserUuid(uuid);
   }
 
-  private ensureIsValidUuid(value: string): void {
-    if (!this.isValidUuid(value)) {
+  protected ensureIsValid(): void {
+    if (!this.isValidUuid(this.value)) {
       throw new InvalidUuidException("Invalid UUID format");
     }
   }
@@ -26,19 +25,13 @@ export class UserUuid {
     return uuidRegex.test(value);
   }
 
-  public getValue(): string {
-    return this.value;
-  }
-
-  public equals(other: UserUuid): boolean {
+  public equals(other: ValueObject<string>): boolean {
     return this.value === other.getValue();
   }
 
-  public serialize(): string {
-    return this.value;
-  }
-
-  public toString(): string {
-    return this.value;
+  public static isValid(uuid: string): boolean {
+    const uuidRegex =
+      /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+    return uuidRegex.test(uuid);
   }
 }

@@ -1,20 +1,20 @@
 import { InvalidPhoneNumberException } from "../exceptions/invalid-phone-number.exception";
+import { ValueObject } from "./ValueObject";
 
-export class UserPhone {
+export class UserPhone extends ValueObject<string> {
   public static readonly MEXICO_COUNTRY_CODE = "+52";
-  private readonly value: string;
 
   private constructor(phone: string) {
-    this.ensureValidPhoneNumber(phone);
-    this.value = this.normalize(phone);
+    super(phone);
+    this.ensureIsValid();
   }
 
   public static create(phone: string): UserPhone {
     return new UserPhone(phone);
   }
 
-  private ensureValidPhoneNumber(phone: string): void {
-    if (!this.isValidMexicanPhoneNumber(phone)) {
+  protected ensureIsValid(): void {
+    if (!this.isValidMexicanPhoneNumber(this.value)) {
       throw new InvalidPhoneNumberException(
         "Phone number must start with +52 and contain 10 digits"
       );
@@ -37,19 +37,11 @@ export class UserPhone {
     return phone.replace(UserPhone.MEXICO_COUNTRY_CODE, "");
   }
 
-  public getValue(): string {
-    return this.value;
-  }
-
-  public equals(other: UserPhone): boolean {
+  public equals(other: ValueObject<string>): boolean {
     return this.normalize(this.value) === this.normalize(other.getValue());
   }
 
-  public serialize(): string {
-    return this.value;
-  }
-
-  public toString(): string {
-    return this.value;
+  public static isValid(phone: string): boolean {
+    return /^\+52\d{10}$/.test(phone.replace(/[\s\-\(\)]/g, ""));
   }
 }
