@@ -6,7 +6,10 @@ export class User {
     public readonly email: string,
     public readonly hashedPassword: string,
     public readonly createdAt: Date,
-    public readonly updatedAt: Date
+    public readonly updatedAt: Date,
+    public readonly phone: string | null,
+    public readonly isEmailVerified: boolean,
+    public readonly isPhoneVerified: boolean
   ) {}
 
   static create(
@@ -16,7 +19,18 @@ export class User {
     hashedPassword: string
   ): User {
     const now = new Date();
-    return new User(0, uuid, name, email, hashedPassword, now, now);
+    return new User(
+      0,
+      uuid,
+      name,
+      email,
+      hashedPassword,
+      now,
+      now,
+      null,
+      false,
+      false
+    );
   }
 
   static reconstitute(
@@ -26,7 +40,10 @@ export class User {
     email: string,
     hashedPassword: string,
     createdAt: Date,
-    updatedAt: Date
+    updatedAt: Date,
+    phone: string | null,
+    isEmailVerified: boolean,
+    isPhoneVerified: boolean
   ): User {
     return new User(
       id,
@@ -35,7 +52,10 @@ export class User {
       email,
       hashedPassword,
       createdAt,
-      updatedAt
+      updatedAt,
+      phone,
+      isEmailVerified,
+      isPhoneVerified
     );
   }
 
@@ -47,7 +67,10 @@ export class User {
       this.email,
       this.hashedPassword,
       this.createdAt,
-      this.updatedAt
+      this.updatedAt,
+      this.phone,
+      this.isEmailVerified,
+      this.isPhoneVerified
     );
   }
 
@@ -59,7 +82,40 @@ export class User {
       this.email,
       this.hashedPassword,
       this.createdAt,
-      new Date()
+      new Date(),
+      this.phone,
+      this.isEmailVerified,
+      this.isPhoneVerified
+    );
+  }
+
+  verifyEmail(): User {
+    return new User(
+      this.id,
+      this.uuid,
+      this.name,
+      this.email,
+      this.hashedPassword,
+      this.createdAt,
+      this.updatedAt,
+      this.phone,
+      true,
+      this.isPhoneVerified
+    );
+  }
+
+  verifyPhone(phone: string): User {
+    return new User(
+      this.id,
+      this.uuid,
+      this.name,
+      this.email,
+      this.hashedPassword,
+      this.createdAt,
+      this.updatedAt,
+      phone,
+      this.isEmailVerified,
+      true
     );
   }
 }
