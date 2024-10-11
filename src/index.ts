@@ -4,7 +4,8 @@ import morgan from "morgan";
 import rateLimit from "express-rate-limit";
 import path from "path";
 import { env } from "./_config/env.config";
-import { connectWithRetry } from "./_helpers/ormConnection";
+import { connectWithRetry } from "./_helpers/dbConnection";
+import userRoutes from "./users/infrastructure/userRoutes";
 
 const app = express();
 const port = env.port.PORT;
@@ -23,13 +24,13 @@ const limiter = rateLimit({
 
 app.use(limiter);
 
-app.use((_req, res, _next) => {
-  res.status(404).json({ error: "Not Found" });
-});
+
 
 app.get("/", (_req, res) => {
   res.send("Welcome to the users API 🚀");
 });
+
+app.use(userRoutes);
 
 connectWithRetry(10, 10000, () => {
   app.listen(port, () => {
