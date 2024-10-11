@@ -10,8 +10,12 @@ export class UserController {
 
   async saveUser(req: Request, res: Response): Promise<void> {
     try {
-      const { name, email } = req.body;
-      const savedUser = await this.saveUserUseCase.execute({ name, email });
+      const { name, email, password } = req.body;
+      const savedUser = await this.saveUserUseCase.execute({
+        name,
+        email,
+        password,
+      });
       res
         .status(201)
         .json({ message: "User saved successfully", user: savedUser });
