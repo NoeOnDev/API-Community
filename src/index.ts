@@ -24,13 +24,11 @@ const limiter = rateLimit({
 
 app.use(limiter);
 
-
-
 app.get("/", (_req, res) => {
   res.send("Welcome to the users API 🚀");
 });
 
-app.use(userRoutes);
+app.use('/api/v1', userRoutes);
 
 connectWithRetry(10, 10000, () => {
   app.listen(port, () => {

@@ -51,9 +51,11 @@
     "nodemailer": "^6.9.15",
     "pg": "^8.13.0",
     "pg-hstore": "^2.3.4",
+    "reflect-metadata": "^0.2.2",
     "sequelize": "^6.37.4",
     "sequelize-typescript": "^2.1.6",
     "twilio": "^5.3.3",
+    "typeorm": "^0.3.20",
     "uuid": "^10.0.0"
   }
 }

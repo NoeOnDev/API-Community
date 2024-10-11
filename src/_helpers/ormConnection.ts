@@ -1,4 +1,7 @@
-import { sequelize } from "../_config/orm.config";
+import { DataSource } from "typeorm";
+import { config } from "../_config/orm.config";
+
+const dataSource = new DataSource(config);
 
 export async function connectWithRetry(
   retries: number,
@@ -7,9 +10,8 @@ export async function connectWithRetry(
 ) {
   for (let i = 0; i < retries; i++) {
     try {
-      await sequelize.authenticate();
+      await dataSource.initialize();
       console.log("Database connection successful ✅");
-      await sequelize.sync();
       callback();
       return;
     } catch (error) {

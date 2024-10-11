@@ -16,11 +16,19 @@ export class UserController {
         email,
         password,
       });
-      res
-        .status(201)
-        .json({ message: "User saved successfully", user: savedUser });
+
+      const { hashedPassword, ...userWithoutPassword } = savedUser;
+
+      res.status(201).json({
+        message: "User saved successfully",
+        user: userWithoutPassword,
+      });
     } catch (error) {
-      res.status(500).json({ message: "Error saving user", error });
+      if (error instanceof Error) {
+        res.status(400).json({ message: error.message });
+      } else {
+        res.status(500).json({ message: "An unexpected error occurred" });
+      }
     }
   }
 }

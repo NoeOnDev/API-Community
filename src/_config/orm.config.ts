@@ -1,13 +1,14 @@
-import { Sequelize } from "sequelize-typescript";
+import { DataSourceOptions } from "typeorm";
+import { UserEntity } from "../users/infrastructure/UserEntity";
 import { env } from "./env.config";
 
-export const sequelize = new Sequelize({
-  database: env.db.DB_NAME,
-  dialect: "postgres",
-  username: env.db.DB_USER,
-  password: env.db.DB_PASSWORD,
+export const config: DataSourceOptions = {
+  type: "postgres",
   host: env.db.DB_HOST,
   port: env.db.DB_PORT,
-  models: [],
-  logging: false,
-});
+  username: env.db.DB_USER,
+  password: env.db.DB_PASSWORD,
+  database: env.db.DB_NAME,
+  entities: [UserEntity],
+  synchronize: true,
+};
