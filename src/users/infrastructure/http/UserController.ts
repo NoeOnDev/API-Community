@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { SaveUserUseCase } from "../application/SaveUserUseCase";
+import { SaveUserUseCase } from "../../application/SaveUserUseCase";
 
 export class UserController {
   private saveUserUseCase: SaveUserUseCase;

@@ -8,27 +8,27 @@ export class UserEntity {
   @Column({ type: "uuid", unique: true })
   uuid!: string;
 
-  @Column()
+  @Column({ type: "varchar", length: 255 })
   name!: string;
 
-  @Column({ unique: true })
+  @Column({ type: "varchar", length: 255, unique: true })
   email!: string;
 
-  @Column()
+  @Column({ type: "varchar", length: 255 })
   hashedPassword!: string;
 
-  @Column({ nullable: true })
+  @Column({ type: "varchar", length: 20, nullable: true })
   phone!: string | null;
 
-  @Column({ default: false })
+  @Column({ type: "boolean" })
   isEmailVerified!: boolean;
 
-  @Column({ default: false })
+  @Column({ type: "boolean" })
   isPhoneVerified!: boolean;
 
-  @Column()
+  @Column({ type: "timestamp" })
   createdAt!: Date;
 
-  @Column()
+  @Column({ type: "timestamp" })
   updatedAt!: Date;
 }

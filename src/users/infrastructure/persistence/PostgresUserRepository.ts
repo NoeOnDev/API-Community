@@ -1,6 +1,6 @@
 import { Pool } from "pg";
-import { IUserRepository } from "../domain/IUserRepository";
-import { User } from "../domain/User";
+import { IUserRepository } from "../../domain/IUserRepository";
+import { User } from "../../domain/User";
 
 export class PostgresUserRepository implements IUserRepository {
   private pool: Pool;

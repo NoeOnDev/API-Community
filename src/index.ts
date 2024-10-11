@@ -1,3 +1,4 @@
+import "reflect-metadata";
 import express from "express";
 import cors from "cors";
 import morgan from "morgan";
@@ -5,7 +6,7 @@ import rateLimit from "express-rate-limit";
 import path from "path";
 import { env } from "./_config/env.config";
 import { connectWithRetry } from "./_helpers/dbConnection";
-import userRoutes from "./users/infrastructure/userRoutes";
+import userRoutes from "./users/infrastructure/http/userRoutes";
 
 const app = express();
 const port = env.port.PORT;

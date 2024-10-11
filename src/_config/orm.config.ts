@@ -1,5 +1,5 @@
 import { DataSourceOptions } from "typeorm";
-import { UserEntity } from "../users/infrastructure/UserEntity";
+import { UserEntity } from "../users/infrastructure/persistence/UserEntity";
 import { env } from "./env.config";
 
 export const config: DataSourceOptions = {
