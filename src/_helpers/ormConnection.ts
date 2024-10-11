@@ -1,7 +1,7 @@
 import { DataSource } from "typeorm";
 import { config } from "../_config/orm.config";
 
-const dataSource = new DataSource(config);
+export const dataSource = new DataSource(config);
 
 export async function connectWithRetry(
   retries: number,
