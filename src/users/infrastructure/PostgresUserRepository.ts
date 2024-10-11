@@ -11,11 +11,18 @@ export class PostgresUserRepository implements IUserRepository {
 
   async save(user: User): Promise<User> {
     const query = `
-      INSERT INTO users (uuid, name, email, hashed_password)
-      VALUES ($1, $2, $3, $4)
+      INSERT INTO users (uuid, name, email, hashed_password, created_at, updated_at)
+      VALUES ($1, $2, $3, $4, $5, $6)
       RETURNING id;
     `;
-    const values = [user.uuid, user.name, user.email, user.hashedPassword];
+    const values = [
+      user.uuid,
+      user.name,
+      user.email,
+      user.hashedPassword,
+      user.createdAt,
+      user.updatedAt,
+    ];
     const result = await this.pool.query(query, values);
     return user.withId(result.rows[0].id);
   }
@@ -30,7 +37,9 @@ export class PostgresUserRepository implements IUserRepository {
       row.uuid,
       row.name,
       row.email,
-      row.hashed_password
+      row.hashed_password,
+      row.created_at,
+      row.updated_at
     );
   }
 
@@ -44,12 +53,9 @@ export class PostgresUserRepository implements IUserRepository {
       row.uuid,
       row.name,
       row.email,
-      row.hashed_password
+      row.hashed_password,
+      row.created_at,
+      row.updated_at
     );
-  }
-
-  async delete(id: number): Promise<void> {
-    const query = `DELETE FROM users WHERE id = $1`;
-    await this.pool.query(query, [id]);
   }
 }

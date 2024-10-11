@@ -4,7 +4,9 @@ export class User {
     public readonly uuid: string,
     public readonly name: string,
     public readonly email: string,
-    public readonly hashedPassword: string
+    public readonly hashedPassword: string,
+    public readonly createdAt: Date,
+    public readonly updatedAt: Date
   ) {}
 
   static create(
@@ -13,7 +15,8 @@ export class User {
     email: string,
     hashedPassword: string
   ): User {
-    return new User(0, uuid, name, email, hashedPassword);
+    const now = new Date();
+    return new User(0, uuid, name, email, hashedPassword, now, now);
   }
 
   static reconstitute(
@@ -21,12 +24,42 @@ export class User {
     uuid: string,
     name: string,
     email: string,
-    hashedPassword: string
+    hashedPassword: string,
+    createdAt: Date,
+    updatedAt: Date
   ): User {
-    return new User(id, uuid, name, email, hashedPassword);
+    return new User(
+      id,
+      uuid,
+      name,
+      email,
+      hashedPassword,
+      createdAt,
+      updatedAt
+    );
   }
 
   withId(id: number): User {
-    return new User(id, this.uuid, this.name, this.email, this.hashedPassword);
+    return new User(
+      id,
+      this.uuid,
+      this.name,
+      this.email,
+      this.hashedPassword,
+      this.createdAt,
+      this.updatedAt
+    );
+  }
+
+  updateTimestamp(): User {
+    return new User(
+      this.id,
+      this.uuid,
+      this.name,
+      this.email,
+      this.hashedPassword,
+      this.createdAt,
+      new Date()
+    );
   }
 }
