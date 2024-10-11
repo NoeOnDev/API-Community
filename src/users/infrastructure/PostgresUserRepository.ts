@@ -11,7 +11,7 @@ export class PostgresUserRepository implements IUserRepository {
 
   async save(user: User): Promise<User> {
     const query = `
-      INSERT INTO users (uuid, name, email, hashed_password, created_at, updated_at, phone, is_email_verified, is_phone_verified)
+      INSERT INTO users (uuid, name, email, hashed_password, phone, is_email_verified, is_phone_verified, created_at, updated_at)
       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
       RETURNING id;
     `;
@@ -20,11 +20,11 @@ export class PostgresUserRepository implements IUserRepository {
       user.name,
       user.email,
       user.hashedPassword,
-      user.createdAt,
-      user.updatedAt,
       user.phone,
       user.isEmailVerified,
       user.isPhoneVerified,
+      user.createdAt,
+      user.updatedAt,
     ];
     const result = await this.pool.query(query, values);
     return user.withId(result.rows[0].id);

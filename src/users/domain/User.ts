@@ -5,11 +5,11 @@ export class User {
     public readonly name: string,
     public readonly email: string,
     public readonly hashedPassword: string,
-    public readonly createdAt: Date,
-    public readonly updatedAt: Date,
     public readonly phone: string | null,
     public readonly isEmailVerified: boolean,
-    public readonly isPhoneVerified: boolean
+    public readonly isPhoneVerified: boolean,
+    public readonly createdAt: Date,
+    public readonly updatedAt: Date
   ) {}
 
   static create(
@@ -18,18 +18,17 @@ export class User {
     email: string,
     hashedPassword: string
   ): User {
-    const now = new Date();
     return new User(
       0,
       uuid,
       name,
       email,
       hashedPassword,
-      now,
-      now,
       null,
       false,
-      false
+      false,
+      new Date(),
+      new Date()
     );
   }
 
@@ -51,11 +50,11 @@ export class User {
       name,
       email,
       hashedPassword,
-      createdAt,
-      updatedAt,
       phone,
       isEmailVerified,
-      isPhoneVerified
+      isPhoneVerified,
+      createdAt,
+      updatedAt
     );
   }
 
@@ -66,11 +65,11 @@ export class User {
       this.name,
       this.email,
       this.hashedPassword,
-      this.createdAt,
-      this.updatedAt,
       this.phone,
       this.isEmailVerified,
-      this.isPhoneVerified
+      this.isPhoneVerified,
+      this.createdAt,
+      this.updatedAt
     );
   }
 
@@ -81,11 +80,11 @@ export class User {
       this.name,
       this.email,
       this.hashedPassword,
-      this.createdAt,
-      new Date(),
       this.phone,
       this.isEmailVerified,
-      this.isPhoneVerified
+      this.isPhoneVerified,
+      this.createdAt,
+      new Date()
     );
   }
 
@@ -96,11 +95,11 @@ export class User {
       this.name,
       this.email,
       this.hashedPassword,
-      this.createdAt,
-      this.updatedAt,
       this.phone,
       true,
-      this.isPhoneVerified
+      this.isPhoneVerified,
+      this.createdAt,
+      this.updatedAt
     );
   }
 
@@ -111,11 +110,11 @@ export class User {
       this.name,
       this.email,
       this.hashedPassword,
-      this.createdAt,
-      this.updatedAt,
       phone,
       this.isEmailVerified,
-      true
+      true,
+      this.createdAt,
+      this.updatedAt
     );
   }
 }
