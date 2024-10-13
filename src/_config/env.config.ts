@@ -17,6 +17,7 @@ const envSchema = Joi.object({
   TWILIO_ACCOUNT_SID: Joi.string().required(),
   TWILIO_AUTH_TOKEN: Joi.string().required(),
   TWILIO_PHONE_NUMBER: Joi.string().required(),
+  TWILIO_PHONE_NUMBER_SMS: Joi.string().required(),
   JWT_SECRET: Joi.string().required(),
   JWT_EXPIRATION: Joi.string().required(),
   MONGO_URI: Joi.string().required(),
@@ -42,6 +43,7 @@ const {
   TWILIO_ACCOUNT_SID,
   TWILIO_AUTH_TOKEN,
   TWILIO_PHONE_NUMBER,
+  TWILIO_PHONE_NUMBER_SMS,
   JWT_SECRET,
   JWT_EXPIRATION,
   MONGO_URI,
@@ -68,6 +70,7 @@ interface Env {
     TWILIO_ACCOUNT_SID: string;
     TWILIO_AUTH_TOKEN: string;
     TWILIO_PHONE_NUMBER: string;
+    TWILIO_PHONE_NUMBER_SMS: string;
   };
   jwt: {
     JWT_SECRET: string;
@@ -99,6 +102,7 @@ export const env: Env = {
     TWILIO_ACCOUNT_SID: TWILIO_ACCOUNT_SID,
     TWILIO_AUTH_TOKEN: TWILIO_AUTH_TOKEN,
     TWILIO_PHONE_NUMBER: TWILIO_PHONE_NUMBER,
+    TWILIO_PHONE_NUMBER_SMS: TWILIO_PHONE_NUMBER_SMS,
   },
   jwt: {
     JWT_SECRET: JWT_SECRET,
