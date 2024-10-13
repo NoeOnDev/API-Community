@@ -5,13 +5,14 @@ import { ExpiredTokenException } from "../exceptions/ExpiredTokenException";
 
 export class NotificationToken {
   private readonly id: string;
+  private readonly createdAt: Timestamp;
 
   constructor(
     private readonly token: NotificationTokenValue,
-    private readonly expiresAt: ExpirationTime,
-    private readonly createdAt: Timestamp
+    private readonly expiresAt: ExpirationTime
   ) {
     this.id = crypto.randomUUID();
+    this.createdAt = new Timestamp(new Date());
   }
 
   isExpired(currentTime: Date): boolean {
