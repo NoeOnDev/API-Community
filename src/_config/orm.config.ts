@@ -1,5 +1,4 @@
 import { DataSourceOptions } from "typeorm";
-import { UserEntity } from "../users/infrastructure/persistence/UserEntity";
 import { env } from "./env.config";
 
 export const config: DataSourceOptions = {
@@ -9,6 +8,6 @@ export const config: DataSourceOptions = {
   username: env.db.DB_USER,
   password: env.db.DB_PASSWORD,
   database: env.db.DB_NAME,
-  entities: [UserEntity],
+  entities: [],
   synchronize: true,
 };
