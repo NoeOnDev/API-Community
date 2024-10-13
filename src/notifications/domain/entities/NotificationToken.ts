@@ -33,4 +33,8 @@ export class NotificationToken {
   getCreatedAt(): Date {
     return this.createdAt.value;
   }
+
+  getExpiresAt(): Date {
+    return this.expiresAt.value;
+  }
 }

@@ -10,4 +10,8 @@ export class ExpirationTime {
   isBefore(date: Date): boolean {
     return this.expiresAt <= date;
   }
+
+  get value(): Date {
+    return this.expiresAt;
+  }
 }
