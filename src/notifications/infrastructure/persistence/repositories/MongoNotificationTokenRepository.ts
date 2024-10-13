@@ -1,14 +1,16 @@
-import { NotificationTokenRepository } from "../../domain/repositories/NotificationTokenRepository";
-import { NotificationToken } from "../../domain/entities/NotificationToken";
-import { NotificationTokenModel } from "./schemas/NotificationTokenSchema";
-import { NotificationTokenValue } from "../../domain/value-objects/NotificationTokenValue";
-import { ExpirationTime } from "../../domain/value-objects/ExpirationTime";
+import { NotificationTokenRepository } from "../../../domain/repositories/NotificationTokenRepository";
+import { NotificationToken } from "../../../domain/entities/NotificationToken";
+import { NotificationTokenModel } from "../schemas/NotificationTokenSchema";
+import { NotificationTokenValue } from "../../../domain/value-objects/NotificationTokenValue";
+import { ExpirationTime } from "../../../domain/value-objects/ExpirationTime";
 
 export class MongoNotificationTokenRepository
   implements NotificationTokenRepository
 {
   async save(token: NotificationToken): Promise<void> {
     const tokenDocument = new NotificationTokenModel({
+      id: token.getId(),
+      userId: token.getUserId(),
       token: token.getToken(),
       expiresAt: token.getExpiresAt(),
       createdAt: token.getCreatedAt(),
@@ -24,6 +26,7 @@ export class MongoNotificationTokenRepository
       return null;
     }
     return new NotificationToken(
+      tokenDocument.userId,
       new NotificationTokenValue(tokenDocument.token),
       new ExpirationTime(tokenDocument.expiresAt)
     );

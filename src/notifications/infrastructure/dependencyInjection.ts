@@ -1,6 +1,6 @@
 import { CreateNotificationTokenUseCaseImpl } from "../application/use-cases/create-notification-token.use-case";
 import { NotificationTokenController } from "./http/controllers/NotificationTokenController";
-import { MongoNotificationTokenRepository } from "./persistence/MongoNotificationTokenRepository";
+import { MongoNotificationTokenRepository } from "./persistence/repositories/MongoNotificationTokenRepository";
 import { DefaultExpirationTimeService } from "./services/DefaultExpirationTimeService";
 import { NumericTokenGeneratorService } from "./services/NumericTokenGeneratorService";
 

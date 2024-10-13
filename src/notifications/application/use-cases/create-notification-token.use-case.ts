@@ -6,7 +6,7 @@ import { TokenGeneratorService } from "../../domain/services/TokenGeneratorServi
 import { ExpirationTimeService } from "../../domain/services/ExpirationTimeService";
 
 export interface CreateNotificationTokenUseCase {
-  execute(): Promise<string>;
+  execute(userId: string): Promise<string>;
 }
 
 export class CreateNotificationTokenUseCaseImpl
@@ -18,11 +18,12 @@ export class CreateNotificationTokenUseCaseImpl
     private readonly expirationTimeService: ExpirationTimeService
   ) {}
 
-  async execute(): Promise<string> {
+  async execute(userId: string): Promise<string> {
     const token = this.tokenGeneratorService.generate();
     const expirationTime = this.expirationTimeService.calculateExpirationTime();
 
     const notificationToken = new NotificationToken(
+      userId,
       new NotificationTokenValue(token),
       new ExpirationTime(expirationTime)
     );

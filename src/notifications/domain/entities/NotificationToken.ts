@@ -8,6 +8,7 @@ export class NotificationToken {
   private readonly createdAt: Timestamp;
 
   constructor(
+    private readonly userId: string,
     private readonly token: NotificationTokenValue,
     private readonly expiresAt: ExpirationTime
   ) {
@@ -28,6 +29,10 @@ export class NotificationToken {
 
   getId(): string {
     return this.id;
+  }
+
+  getUserId(): string {
+    return this.userId;
   }
 
   getCreatedAt(): Date {
